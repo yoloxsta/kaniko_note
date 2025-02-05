@@ -73,11 +73,11 @@ spec:
                 container(name: 'google-cloud-sdk', shell: '/bin/bash') {
                     sh '''
                     # Update deployment.yaml with new image tags
-                    sed -i 's|image: your-dockerhub-username/hello-world-backend:.*|image: your-dockerhub-username/hello-world-backend:'"$IMAGE_TAG"'|g' k8s/deployment.yaml
-                    sed -i 's|image: your-dockerhub-username/hello-world-frontend:.*|image: your-dockerhub-username/hello-world-frontend:'"$IMAGE_TAG"'|g' k8s/deployment.yaml
+                    sed -i 's|image: your-dockerhub-username/hello-world-backend:.*|image: your-dockerhub-username/hello-world-backend:'"$IMAGE_TAG"'|g' K8s/k8s.yaml
+                    sed -i 's|image: your-dockerhub-username/hello-world-frontend:.*|image: your-dockerhub-username/hello-world-frontend:'"$IMAGE_TAG"'|g' K8s/k8s.yaml
                     
                     # Apply the deployment to Kubernetes
-                    kubectl apply -f k8s/deployment.yaml
+                    kubectl apply -f K8s/k8s.yaml
                     '''
                 }
             }
