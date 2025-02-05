@@ -16,7 +16,7 @@
 
     <script>
         function fetchHello() {
-            fetch('http://soetintaung-backend:3000/hello')  // Kubernetes backend service
+            fetch('http://sta-service2:3000/hello')  // Kubernetes backend service
                 .then(response => response.text())
                 .then(data => document.getElementById('message').innerText = data)
                 .catch(error => console.error('Error:', error));
