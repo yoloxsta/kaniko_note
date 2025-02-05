@@ -1,0 +1,80 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sta-deployment
+  labels:
+    app: sta
+spec:
+  replicas: 1  
+  selector:
+    matchLabels:
+      app: sta
+  template:
+    metadata:
+      labels:
+        app: sta
+    spec:
+      containers:
+      - name: sta-container
+        image: your-dockerhub-username/hello-frontend:latest
+        imagePullPolicy: Always 
+        ports:
+        - containerPort: 80
+      imagePullSecrets:
+      - name: regcredsta
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: sta-service
+  labels:
+    app: sta
+spec:
+  selector:
+    app: sta  
+  ports:
+    - protocol: TCP
+      port: 80  
+      targetPort: 80  
+  type: ClusterIP  
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sta-deployment2
+  labels:
+    app: sta
+spec:
+  replicas: 1  
+  selector:
+    matchLabels:
+      app: sta
+  template:
+    metadata:
+      labels:
+        app: sta
+    spec:
+      containers:
+      - name: sta-container
+        image: your-dockerhub-username/hello-backend:latest
+        imagePullPolicy: Always 
+        ports:
+        - containerPort: 3000
+      imagePullSecrets:
+      - name: regcredsta
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: sta-service2
+  labels:
+    app: sta
+spec:
+  selector:
+    app: sta  
+  ports:
+    - protocol: TCP
+      port: 3000
+      targetPort: 3000  
+  type: ClusterIP  
