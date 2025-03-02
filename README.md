@@ -19,3 +19,4 @@ kubectl create secret docker-registry regcredsta --docker-username=name --docker
 npm init -y
 npm install express cors
 ```
+#
